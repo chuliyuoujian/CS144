@@ -1,9 +1,9 @@
 #pragma once
 
 #include <cstdint>
+#include <deque>
 #include <string>
 #include <string_view>
-
 class Reader;
 class Writer;
 
@@ -25,6 +25,13 @@ protected:
   // Please add any additional state to the ByteStream here, and not to the Writer and Reader interfaces.
   uint64_t capacity_;
   bool error_ {};
+
+public:
+  bool end_write;
+  bool end_read;
+  uint64_t write_size;
+  uint64_t read_size;
+  std::deque<char> buffer; // 读写数据
 };
 
 class Writer : public ByteStream
@@ -41,8 +48,8 @@ public:
 class Reader : public ByteStream
 {
 public:
-  std::string_view peek() const; // Peek at the next bytes in the buffer
-  void pop( uint64_t len );      // Remove `len` bytes from the buffer
+  std::string peek() const; // Peek at the next bytes in the buffer
+  void pop( uint64_t len ); // Remove `len` bytes from the buffer
 
   bool is_finished() const;        // Is the stream finished (closed and fully popped)?
   uint64_t bytes_buffered() const; // Number of bytes currently buffered (pushed and not popped)

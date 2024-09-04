@@ -1,0 +1,5 @@
+/home/kfc/minnow/apps/CMakeFiles/stream_copy.dir
+/home/kfc/minnow/apps/CMakeFiles/webget.dir
+/home/kfc/minnow/apps/CMakeFiles/tcp_native.dir
+/home/kfc/minnow/apps/CMakeFiles/edit_cache.dir
+/home/kfc/minnow/apps/CMakeFiles/rebuild_cache.dir

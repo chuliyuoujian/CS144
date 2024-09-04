@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/tcp_native.dir/tcp_native.o -o tcp_native   -L/home/kfc/minnow/apps  libstream_copy.a -lminnow_debug -lutil_debug 

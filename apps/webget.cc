@@ -10,7 +10,24 @@ using namespace std;
 void get_URL( const string& host, const string& path )
 {
   cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
-  cerr << "Warning: get_URL() has not been implemented yet.\n";
+  //  cerr << "Warning: get_URL() has not been implemented yet.\n";
+  // 创建socket，以http协议连接服务器
+  auto socket = TCPSocket();
+  Address addr( host, "http" );
+  socket.connect( addr );
+  // 写获取信息的命令
+  string message = "";
+  message = "GET " + path + " HTTP/1.1\r\n";
+  message += "Host: " + host + "\r\n";
+  message += "Connection: close\r\n\r\n";
+  // 写文件
+  socket.write( message );
+  while ( !socket.eof() ) {
+    string buf = "";
+    socket.read( buf );
+    cout << buf;
+  }
+  socket.close();
 }
 
 int main( int argc, char* argv[] )
@@ -32,8 +49,8 @@ int main( int argc, char* argv[] )
     }
 
     // Get the command-line arguments.
-    const string host { args[1] };
-    const string path { args[2] };
+    const string host = args[1];
+    const string path = args[2];
 
     // Call the student-written function.
     get_URL( host, path );

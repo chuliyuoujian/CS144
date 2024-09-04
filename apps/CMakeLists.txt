@@ -1,3 +1,5 @@
+# Enable C++20
+set(CMAKE_CXX_STANDARD 20)
 add_library (stream_copy STATIC bidirectional_stream_copy.cc)
 
 macro(add_app exec_name)

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "byte_stream.hh"
-
+#include <map>
 class Reassembler
 {
 public:
@@ -41,5 +41,22 @@ public:
   const Writer& writer() const { return output_.writer(); }
 
 private:
-  ByteStream output_; // the Reassembler writes to this ByteStream
+  ByteStream output_;          // the Reassembler writes to this ByteStream
+  size_t capacity_;            // 最大的能放在字节流output里面的字节大小
+  std::map<size_t, char> buf_; // 收到的不靠谱字节流
+  bool flag_eof;               // 结束标志
+  // size_t index_eof;//结尾的字节编号
+public:
+  size_t get_unread()
+  { // 得到第一个未读取的字符下标
+    return output_.bytes_popped();
+  }
+  size_t get_unsort()
+  { // 得到第一个没有排序的字符下标（也就是没有放进output_的第一个下标）
+    return output_.bytes_pushed();
+  }
+  size_t get_unaccept()
+  { // 得到不能超出output_容量限制u的下标
+    return get_unread() + capacity_;
+  }
 };
