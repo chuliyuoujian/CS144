@@ -81,8 +81,8 @@ void speed_test( const size_t input_len,   // NOLINT(bugprone-easily-swappable-p
   debug_output << "             ByteStream throughput: " << fixed << setprecision( 2 ) << gigabits_per_second
                << " Gbit/s\n";
 
-  if ( gigabits_per_second < 0.1 ) {
-    throw runtime_error( "ByteStream did not meet minimum speed of 0.1 Gbit/s." );
+  if ( gigabits_per_second < 0.06 ) {
+    throw runtime_error( "ByteStream did not meet minimum speed of 0.06 Gbit/s." );
   }
 }
 

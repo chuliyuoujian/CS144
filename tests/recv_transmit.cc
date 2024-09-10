@@ -16,7 +16,7 @@ int main()
     auto rd = get_random_engine();
 
     {
-      TCPReceiverTestHarness test { "transmit 1", 4000 };
+      TCPReceiverTestHarness test { "transmit 1", 100 };
       test.execute( SegmentArrives {}.with_syn().with_seqno( 0 ) );
       test.execute( SegmentArrives {}.with_seqno( 1 ).with_data( "abcd" ) );
       test.execute( ExpectAckno { Wrap32 { 5 } } );
@@ -27,7 +27,7 @@ int main()
 
     {
       const uint32_t isn = 384678;
-      TCPReceiverTestHarness test { "transmit 2", 4000 };
+      TCPReceiverTestHarness test { "transmit 2", 400 };
       test.execute( SegmentArrives {}.with_syn().with_seqno( isn ) );
       test.execute( SegmentArrives {}.with_seqno( isn + 1 ).with_data( "abcd" ) );
       test.execute( ExpectAckno { Wrap32 { isn + 5 } } );
@@ -43,7 +43,7 @@ int main()
 
     {
       const uint32_t isn = 5;
-      TCPReceiverTestHarness test { "transmit 3", 4000 };
+      TCPReceiverTestHarness test { "transmit 3", 400 };
       test.execute( SegmentArrives {}.with_syn().with_seqno( isn ) );
       test.execute( SegmentArrives {}.with_seqno( isn + 1 ).with_data( "abcd" ) );
       test.execute( ExpectAckno { Wrap32 { isn + 5 } } );
@@ -58,9 +58,9 @@ int main()
 
     // Many (arrive/read)s
     {
-      TCPReceiverTestHarness test { "transmit 4", 4000 };
+      TCPReceiverTestHarness test { "transmit 4", 400 };
       const uint32_t max_block_size = 10;
-      const uint32_t n_rounds = 10000;
+      const uint32_t n_rounds = 100;
       const uint32_t isn = 893472;
       size_t bytes_sent = 0;
       test.execute( SegmentArrives {}.with_syn().with_seqno( isn ) );

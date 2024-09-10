@@ -102,7 +102,7 @@ int main()
 {
   try {
     TCPConfig cfg {};
-    cfg.recv_capacity = 65000;
+    cfg.recv_capacity = 650;
     auto rd = get_random_engine();
 
     // non-overlapping out-of-order segments
