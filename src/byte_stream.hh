@@ -32,9 +32,7 @@ public:
   uint64_t write_size;
   uint64_t read_size;
   std::deque<char> buffer; // 读写数据
-  uint64_t get_capacity_() {
-	  return capacity_;
-  }
+  uint64_t get_capacity_() { return capacity_; }
 };
 
 class Writer : public ByteStream

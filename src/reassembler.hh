@@ -6,7 +6,9 @@ class Reassembler
 {
 public:
   // Construct Reassembler to write into given ByteStream.
-  explicit Reassembler( ByteStream&& output) : output_( std::move( output ) ) , buf_( {} ), flag_eof(false),index_eof(0){}
+  explicit Reassembler( ByteStream&& output )
+    : output_( std::move( output ) ), buf_( {} ), flag_eof( false ), index_eof( 0 )
+  {}
 
   /*
    * Insert a new substring to be reassembled into a ByteStream.
@@ -44,7 +46,7 @@ private:
   ByteStream output_;          // the Reassembler writes to this ByteStream
   std::map<size_t, char> buf_; // 收到的不靠谱字节流
   bool flag_eof;               // 结束标志
-   size_t index_eof;//结尾的字节编号,用来确保所有字节都能被写入
+  size_t index_eof;            // 结尾的字节编号,用来确保所有字节都能被写入
 public:
   size_t get_unread()
   { // 得到第一个未读取的字符下标
@@ -56,6 +58,6 @@ public:
   }
   size_t get_unaccept()
   { // 得到不能超出output_容量限制u的下标
-    return get_unread() +output_.get_capacity_();
+    return get_unread() + output_.get_capacity_();
   }
 };
