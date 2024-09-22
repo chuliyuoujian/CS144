@@ -17,7 +17,7 @@ class TCPSender
 public:
   /* Construct TCP sender with given default Retransmission Timeout and possible ISN */
   TCPSender( ByteStream&& input, Wrap32 isn, uint64_t initial_RTO_ms )
-    : input_( std::move( input ) ), isn_( isn ), initial_RTO_ms_( initial_RTO_ms ), RTO_ms_( initial_RTO_ms_ )
+    : input_( std::move( input ) ), isn_( isn ), initial_RTO_ms_( initial_RTO_ms )
   {}
 
   /* Generate an empty TCPSenderMessage */
@@ -53,7 +53,7 @@ private:
   ByteStream input_;
   Wrap32 isn_;
   uint64_t initial_RTO_ms_;
-  uint64_t RTO_ms_;                           // 现在的RTO,在初始化列表初始化了
+  uint64_t RTO_ms_{initial_RTO_ms_};                  // 现在的RTO,在初始化列表初始化了
   uint64_t abs_ack_ { 0 };                    // ack的绝对序列号
   uint64_t abs_old_ack_ { 0 };                // 上一个ack用来当checkpoint
   uint64_t sequence_numbers_in_flight_ { 0 }; // 发送了但还没收到ack的字符数(outstanding的字符数量)
