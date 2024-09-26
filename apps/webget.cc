@@ -4,7 +4,7 @@
 #include <iostream>
 #include <span>
 #include <string>
-
+#include "tcp_minnow_socket.hh"
 using namespace std;
 
 void get_URL( const string& host, const string& path )
@@ -12,7 +12,7 @@ void get_URL( const string& host, const string& path )
   cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
   //  cerr << "Warning: get_URL() has not been implemented yet.\n";
   // 创建socket，以http协议连接服务器
-  auto socket = TCPSocket();
+  auto socket = CS144TCPSocket();
   Address addr( host, "http" );
   socket.connect( addr );
   // 写获取信息的命令

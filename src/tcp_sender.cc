@@ -51,6 +51,7 @@ void TCPSender::push( const TransmitFunction& transmit )
 		seq_=Wrap32::wrap(abs_ack_,isn_);
 		view.remove_prefix(len);
 	}
+	
 }
 
 TCPSenderMessage TCPSender::make_empty_message() const
